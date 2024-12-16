@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Add Menu Item</h2>
+    <form method="POST" action="/add_menu">
+        <input type="text" name="name" placeholder="Item Name" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" name="price" placeholder="Price" step="0.01" required>
+        <button type="submit">Add Item</button>
+    </form>
+
+    <h2>Menu Items</h2>
+    <ul>
+        {% for item in menu_items %}
+        <li>{{ item.name }} - ${{ item.price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Orders</h2>
+    <ul>
+        {% for order in orders %}
+        <li>Order #{{ order.id }}: Item ID {{ order.menu_item_id }}, Quantity: {{ order.quantity }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>QR Code</h2>
+    <a href="/generate_qr">Generate QR Code</a>
+    <img src="/static/qr_code.png" alt="QR Code">
+</body>
+</html>

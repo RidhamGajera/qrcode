@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <ul>
+        {% for item in menu_items %}
+        <li>
+            <strong>{{ item.name }}</strong>: {{ item.description }} - ${{ item.price }}
+            <form method="POST" action="/order">
+                <input type="hidden" name="menu_item_id" value="{{ item.id }}">
+                <input type="number" name="quantity" placeholder="Quantity" required>
+                <button type="submit">Order</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
